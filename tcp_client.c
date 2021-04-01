@@ -7,7 +7,7 @@
 
 #define port "59000"
 
-int main (void){
+int main (){
     int fd;
     ssize_t n;
     struct addrinfo hints, *res;
@@ -18,6 +18,7 @@ int main (void){
     hints.ai_family = AF_INET; //IPv4
     hints.ai_socktype = SOCK_STREAM;
 
+    /*Get ip address of server?*/
     n = getaddrinfo("tejo.tecnico.ulisboa.pt", port, &hints, &res);
     if (n != 0)
     {
