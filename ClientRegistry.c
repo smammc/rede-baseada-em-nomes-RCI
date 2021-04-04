@@ -37,7 +37,7 @@ int main (int argc, char *argv[]) {
             fgets(line, MAX_LINE, stdin);
             sscanf(line, "%s", command);
             if (strcmp(command, "join") == 0) {
-                sscanf(line, "%*s%s%s", net, id); 
+                sscanf(line, "%*s%s%s", net, id); /*skip 1st and store 2nd and 3rd arguments*/
 
                 // register node in the node server
                 sprintf(message, "REG %s %s %s", net, argv[1], argv[2]);
