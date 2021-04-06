@@ -44,7 +44,7 @@ int main (int argc, char *argv[]){
             Add server IP and Port to argv*/
             else if (argv[1] != KNOT_SERVER_IP && argv[2] != KNOT_SERVER_PORT){
                 printf("Server IP and Port not entered.\
-                \nAssuming default values:\nIP: %s\nPort: %s",
+                \nAssuming default values:\nIP: %s\nPort: %s\n",
                 KNOT_SERVER_IP, KNOT_SERVER_PORT);
                 argc= argc + 2;
                 argv[3] = KNOT_SERVER_IP;
@@ -119,9 +119,7 @@ int main (int argc, char *argv[]){
             break; /*Registrating*/
             
             case registered:
-            printf("Waiting next command.\n\
-            You can use leave to unregister the node,\n\
-            Or you can use exit.");
+            printf("Waiting next command.\nYou can use leave to unregister the node,\nOr you can use exit.");
             /*You can use join to register another node,\n\*/
             fgets(line, MAX_LINE, stdin);
             sscanf(line, "%s", command);
@@ -140,7 +138,7 @@ int main (int argc, char *argv[]){
             break; /*Registered*/
 
             case unregister:
-            printf("Waiting for confirmation from server. You can exit");
+            printf("Waiting for confirmation from server. You can exit\n");
             // wait either for confirmation of unreg or for exit
             FD_ZERO(&rfds);
             FD_SET(0, &rfds);
