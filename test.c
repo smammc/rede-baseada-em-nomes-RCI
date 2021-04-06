@@ -28,7 +28,7 @@ int main (int argc, char *argv[]){
     // set hints to build socket information about server
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;
-    hints.ai_protocol = SOCK_DGRAM;
+    hints.ai_socktype = SOCK_DGRAM;
 
 
     
@@ -70,17 +70,20 @@ int main (int argc, char *argv[]){
             case notregistered:
             printf("Do you want to join or exit?\n");
             fgets(line, MAX_LINE, stdin);
-            sscanf(line, "%s%s%s", command, net, id);
-            if (strcmp(command, "exit") == 0){
-                state = turnoff;
-            }
-            else if (strcmp(command, "join") == 0){
-                // sscanf(line, "%*s%s%s", net, id);
+            sscanf(line, "%s", command);
+            if (strcmp(command, "join") == 0){
+               sscanf(line, "%*s %s %s", net, id);
 
                 // register node in the server
-                sprintf(message, "REG %s %s %s", net, argv[1], argv[2]);
+                printf(message, "REG %s %s %s", net, argv[1], argv[2]);
                 sendto(sockfd, message, strlen(message), 0, res->ai_addr, res->ai_addrlen);
                 state = registrating;
+            }
+            else if (strcmp(command, "exit") == 0){
+                freeaddrinfo(res);
+                close(sockfd);
+                exit(0);
+               
             }
             break; /*notregistered*/
 
