@@ -44,11 +44,12 @@ int main (int argc, char *argv[]){
             Add server IP and Port to argv*/
             else if (argv[1] != KNOT_SERVER_IP && argv[2] != KNOT_SERVER_PORT){
                 printf("Server IP and Port not entered.\
-                \nAssuming default values:\nIP: %s\nPort: %s",
+                \nAssuming default values:\nIP: %s\nPort: %s\n",
                 KNOT_SERVER_IP, KNOT_SERVER_PORT);
-                argc= argc + 2;
+                argc += 2;
                 argv[3] = KNOT_SERVER_IP;
                 argv[4] = KNOT_SERVER_PORT;
+                printf("\n%d\n", argc);
 
                 /* build socket information about the server,
                 including its IP address from its name*/
