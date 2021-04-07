@@ -6,13 +6,16 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#define MAX_MESSAGE 2048
+#define MAX_LINE 1024
+
 int main (int argc, char *argv[]){
     struct addrinfo hints, *res;
     int sockfd, n;
     struct sockaddr servaddr;
     socklen_t addrlen;
     fd_set rfds;
-    /*char line[MAX_LINE], command[MAX_LINE], net[MAX_LINE], id[MAX_LINE], message[MAX_MESSAGE + 1];*/
+    char line[MAX_LINE], command[MAX_LINE], net[MAX_LINE], id[MAX_LINE], message[MAX_MESSAGE + 1];
     
     // enumerate states
     enum{notregistered, registrating, registered, unregister, turnoff} state;
@@ -35,8 +38,8 @@ int main (int argc, char *argv[]){
         getaddrinfo(argv[3], argv[4], &hints, &res);
         state = notregistered;
     }
-}
-while(1){
+
+    while(1){
         switch (state){
             case notregistered:
             printf("Do you want to join or exit?\n");
@@ -91,7 +94,7 @@ while(1){
             break; /*Registrating*/
             
             case registered:
-            printf("Waiting next command.\nYou can use leave to unregister the node,\nOr you can use exit.");
+            printf("Waiting next command.\nYou can use leave to unregister the node,\nOr you can use exit.\n");
             /*You can use join to register another node,\n\*/
             fgets(line, MAX_LINE, stdin);
             sscanf(line, "%s", command);
